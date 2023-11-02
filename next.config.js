@@ -3,10 +3,6 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     forceSwcTransforms: false,
-<<<<<<< HEAD
-  
-=======
->>>>>>> origin/main
   },
 };
 
