@@ -108,9 +108,16 @@ padding: 0;
 
 }
 .text{
+<<<<<<< HEAD
   width: 70%;
   margin: auto;
   margin-top: 20px;
+=======
+  font-size: 4rem;
+  background-color: rgb(17, 15, 15);
+  color: white;
+  height: 577px;
+>>>>>>> origin/main
 }
 .btn{
   border : none;
