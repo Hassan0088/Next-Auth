@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 
 const Signup = () => {
   const [initialValues, setInitialValues] = useState();
+  const [passwordShown, setPasswordShown] = useState(false);
   const { data: session } = useSession();
   const {
     handleSubmit,
@@ -34,6 +35,10 @@ const Signup = () => {
       console.error("Sign-up error:", error);
     }
   };
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
+
   if (!session) {
     return (
       <div>
@@ -60,6 +65,11 @@ const Signup = () => {
                                 value: 10,
                                 message:
                                   "Name should be less than 10 characters",
+                              },
+                              pattern: {
+                                value: /^[A-Za-z]+$/,
+                                message:
+                                  "Name should only contain alphabetic characters",
                               },
                             })}
                           />
@@ -96,16 +106,25 @@ const Signup = () => {
                           controlId="formBasicPassword"
                         >
                           <Form.Label>Password</Form.Label>
-                          <Form.Control
-                            type="password"
-                            name="password"
-                            placeholder="Password"
-                            {...register("password", {
-                              required: true,
-                              pattern:
-                                /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                            })}
-                          />
+                          <div>
+                            <Form.Control
+                              type={passwordShown ? "text" : "password"}
+                              name="password"
+                              placeholder="Password"
+                              {...register("password", {
+                                required: true,
+                                pattern:
+                                  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                              })}
+                            />
+                            <p className="password">
+                              <input
+                                type="checkbox"
+                                onClick={togglePasswordVisiblity}
+                              />{" "}
+                              Show Password
+                            </p>
+                          </div>
                           {errors.password && (
                             <p style={{ color: "red" }}>
                               Your Password must contain special character,

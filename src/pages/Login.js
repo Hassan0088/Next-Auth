@@ -11,9 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const router = useRouter();
   const { data: session } = useSession();
-
+  const [passwordShown, setPasswordShown] = useState(false);
   const [initialValues, setInitialValues] = useState();
-  
+
   const handleSignIn = async (e) => {
     e.preventDefault();
 
@@ -45,6 +45,9 @@ const Login = () => {
     reValidateMode: "onSubmit",
     defaultValues: initialValues,
   });
+  const togglePasswordVisiblity = () => {
+    setPasswordShown(passwordShown ? false : true);
+  };
   if (!session) {
     return (
       <div>
@@ -55,7 +58,7 @@ const Login = () => {
                 <Card.Body>
                   <div className="mb-3 mt-md-4">
                     <h2 className="fw-bold mb-2">TechProject</h2>
-                    <p className="mb-5">
+                    <p className="mb-4">
                       Please enter your login and password!
                     </p>
                     <div className="mb-3">
@@ -81,7 +84,7 @@ const Login = () => {
                         <Form.Group>
                           <Form.Label>Password</Form.Label>
                           <Form.Control
-                            type="password"
+                            type={passwordShown ? "text" : "password"}
                             placeholder="Password"
                             {...register("password", {
                               required: true,
@@ -89,6 +92,13 @@ const Login = () => {
                                 /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
                             })}
                           />
+                          <p className="password">
+                            <input
+                              type="checkbox"
+                              onClick={togglePasswordVisiblity}
+                            />{" "}
+                            Show Password
+                          </p>
                           {errors.password && (
                             <p style={{ color: "red" }}>
                               Please check the Password

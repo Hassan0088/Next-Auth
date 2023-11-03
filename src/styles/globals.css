@@ -237,8 +237,11 @@ color: white;
   height: 50px;
   margin: auto;
   margin-top: 300px;
-  border: 10px solid #f3f3f3; /* Light grey */
-  border-top: 10px solid #383636; /* Black */
+  border: 10px solid #f3f3f3; 
+  border-top: 10px solid #383636; 
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
+}
+.password{
+  margin-top: 15px;
 }

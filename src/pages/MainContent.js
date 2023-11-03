@@ -16,7 +16,6 @@ const MainContent = () => {
   if (session) {
     return (
       <>
-      
         <div className="text">
           <Carousel>
             <Carousel.Item>
