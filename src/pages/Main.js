@@ -4,11 +4,20 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+
 const Main = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const signout = () => {
     signOut({ redirect: false, callbackUrl: "/Login" });
   };
+
+  if (status === "loading") {
+    return <div className="spinner-container">
+    <div className="loading-spinner">
+    </div>
+  </div>;
+  }
+
   return (
     <Navbar bg="dark" data-bs-theme="dark" className="parent-nav">
       <Container className="child-nav">
@@ -56,37 +65,32 @@ const Main = () => {
           )}
         </Nav>
       </Container>
-      {session ? (
-        ""
-      ) : (
-        <Link
-          className="log"
-          href="/Login"
-          prefetch={false}
-          passHref
-          style={{
-            textDecoration: "none",
-          }}
-        >
-          Login
-        </Link>
+      {!session && (
+        <>
+          <Link
+            className="log"
+            href="/Login"
+            prefetch={false}
+            passHref
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            Login
+          </Link>
+          <Link
+            className="log"
+            href="/Signup"
+            prefetch={false}
+            passHref
+            style={{
+              textDecoration: "none",
+            }}
+          >
+            Sign-Up
+          </Link>
+        </>
       )}
-      {session ? (
-        ""
-      ) : (
-        <Link
-          className="log"
-          href="/Signup"
-          prefetch={false}
-          passHref
-          style={{
-            textDecoration: "none",
-          }}
-        >
-          Sign-Up
-        </Link>
-      )}
-
       {session && (
         <button className="nav-button" onClick={() => signout()}>
           Logout
