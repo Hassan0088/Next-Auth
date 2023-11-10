@@ -12,10 +12,11 @@ const Main = () => {
   };
 
   if (status === "loading") {
-    return <div className="spinner-container">
-    <div className="loading-spinner">
-    </div>
-  </div>;
+    return (
+      <div className="spinner-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
   }
 
   return (
@@ -25,7 +26,7 @@ const Main = () => {
         <Nav>
           <Link
             href="/"
-            passHref
+            prefetch={false}
             style={{
               textDecoration: "none",
             }}
@@ -34,7 +35,7 @@ const Main = () => {
           </Link>
           <Link
             href="/Sell"
-            passHref
+            prefetch={false}
             style={{
               textDecoration: "none",
             }}
@@ -44,7 +45,6 @@ const Main = () => {
           <Link
             href="/Listing"
             prefetch={false}
-            passHref
             style={{
               textDecoration: "none",
             }}
@@ -54,7 +54,6 @@ const Main = () => {
           {session && (
             <Link
               href="/MyListing"
-              passHref
               prefetch={false}
               style={{
                 textDecoration: "none",
@@ -71,7 +70,6 @@ const Main = () => {
             className="log"
             href="/Login"
             prefetch={false}
-            passHref
             style={{
               textDecoration: "none",
             }}
@@ -82,7 +80,6 @@ const Main = () => {
             className="log"
             href="/Signup"
             prefetch={false}
-            passHref
             style={{
               textDecoration: "none",
             }}
